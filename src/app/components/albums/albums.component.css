@@ -1,0 +1,98 @@
+header {
+    background-color: black;
+    height: 65px;
+    color:white;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin: 0px 10px 0px 10px;
+    font-size: 25px;
+    position: fixed;
+    top:0;
+    left:0;
+    right:0;
+    z-index: 100;
+}
+
+
+.btnBack {
+    color: white;
+    text-decoration: none;
+    display: inline-block;
+    cursor: pointer;
+    margin-left: 10px;
+    margin-right: 10px;
+}
+
+.btnBack:hover {
+    color: gold;
+}
+
+.search {
+    margin-left:5px;
+    margin-left: 5px;
+    width: 250px;
+    height: 25px;
+    border-radius: 5px;
+    outline: none;
+    font-size: 18px;
+}
+
+.likesCounter {
+    font-size: 35px;
+    margin-right: 25px;
+    z-index: 100;
+}
+
+
+.albums_wrapper {
+    max-width: 1600px;
+    margin: auto;
+    margin-top: 60px;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+}
+
+.albums_wrapper_album {
+    
+    margin: 15px;
+    border: 0.5px solid whitesmoke;
+    cursor: pointer;
+    position: relative;
+    border-radius: 5px;
+}
+
+.albums_wrapper_album:hover {
+    border: 2px solid gold;
+    border-radius: 5px;
+}
+
+.albums_wrapper_album_img {
+    width: 250px;
+    height: 250px;
+    border-radius: 5px;
+}
+
+.modal_album_info {
+    display: none;
+    position: absolute;
+    top:0;
+    left:0;
+    right: 0;
+    bottom:0;
+    color: whitesmoke;
+    background-color: rgba(0, 0, 0, 0.7);
+}
+
+.modal_album_info h2, h3 {
+    margin-top: 35px;
+    text-align: center;
+}
+
+.fillHeart, .heart {
+    margin: 0;
+    text-align: center;
+    font-size: 40px;
+}
+

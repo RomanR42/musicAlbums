@@ -1,0 +1,23 @@
+<header>
+    <div>
+        <a routerLink="" class="btnBack">Back</a>
+        <input type="text" class="search">
+    </div>
+    <div class="likesCounter">&#9825;</div>
+</header>
+    <div class="albums_wrapper">
+        <div class="albums_wrapper_album" *ngFor="let album of albumsData; let i=index" 
+            (mouseover)="showModal (modal_album)" 
+            (mouseleave)="closeModal(modal_album)"> 
+            <img class="albums_wrapper_album_img" src="{{imgArray[i]}}" alt="album image">
+            <div class="modal_album_info" #modal_album (click)="makeLike(album, imgArray[i])">
+                <h2>{{album.name}}</h2>
+                <h3>{{album.artist.name}}</h3>
+                <p class="heart" *ngIf="!album.like">&#9825;</p>
+                <p class="fillHeart" *ngIf="album.like">&#9829;</p>
+                
+            </div>
+        </div>
+    </div>
+
+
