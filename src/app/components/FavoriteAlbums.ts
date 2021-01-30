@@ -1,12 +1,12 @@
 export class FavoriteAlbums {
 
     name:string;
-    artist:string;
+    artist:object = {name:''}
     imgLink:string;
     like:boolean;
     constructor (name:string, artist:string, imgLink:string, like:boolean){
         this.name = name;
-        this.artist = artist;
+        this.artist['name'] = artist;
         this.imgLink = imgLink;
         this.like = like;
 

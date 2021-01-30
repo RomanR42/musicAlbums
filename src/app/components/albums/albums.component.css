@@ -41,7 +41,20 @@ header {
 .likesCounter {
     font-size: 35px;
     margin-right: 25px;
-    z-index: 100;
+    position: relative;
+}
+
+.likesCounter_number {
+    display: inline-block;
+    font-size: 16px;
+    font-weight: bold;
+    padding: 5px 10px 5px 10px;
+    background-color: blue;
+    border-radius: 50px;
+    position:absolute;
+    right: -14px;
+    top: 3px;
+      
 }
 
 
