@@ -9,7 +9,6 @@ export class FavoriteAlbums {
         this.artist['name'] = artist;
         this.imgLink = imgLink;
         this.like = like;
-
     }
 
 }

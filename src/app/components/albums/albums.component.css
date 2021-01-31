@@ -1,11 +1,12 @@
 header {
     background-color: black;
+    max-width: 1400px;
     height: 65px;
     color:white;
     display: flex;
     justify-content: space-between;
     align-items: center;
-    margin: 0px 10px 0px 10px;
+    margin:auto;
     font-size: 25px;
     position: fixed;
     top:0;
@@ -109,3 +110,14 @@ header {
     font-size: 40px;
 }
 
+@media (max-width: 450px) {
+    .search {
+        width: 150px;
+        font-size: 16px;
+    }
+
+    header {
+        font-size: 18px;
+    }
+
+}

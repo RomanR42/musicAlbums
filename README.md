@@ -1,26 +1,13 @@
-# MusicApp
+# Test task /MusicApp/
 
-This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 10.1.1.
 
-## Development server
+## Short description
 
-Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The app will automatically reload if you change any of the source files.
+1. Counting of liked albums is carried out separately for each genre.
+2. When you reload the page, the albums you like are displayed at the top of the list.
+3. The number of downloaded albums from the server is limited to 15 (I think this is enough to test the program)
 
-## Code scaffolding
-
-Run `ng generate component component-name` to generate a new component. You can also use `ng generate directive|pipe|service|class|guard|interface|enum|module`.
-
-## Build
-
-Run `ng build` to build the project. The build artifacts will be stored in the `dist/` directory. Use the `--prod` flag for a production build.
-
-## Running unit tests
-
-Run `ng test` to execute the unit tests via [Karma](https://karma-runner.github.io).
-
-## Running end-to-end tests
-
-Run `ng e2e` to execute the end-to-end tests via [Protractor](http://www.protractortest.org/).
+## I am looking forward to your feedback! Thanks
 
 ## Further help
 

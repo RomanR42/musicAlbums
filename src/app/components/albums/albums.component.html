@@ -6,19 +6,18 @@
     <div class="likesCounter">&#10084; <span class="likesCounter_number">{{likesCounter}}</span>  </div>
 </header>
   
-    <div class="albums_wrapper" *ngIf="albumsData && imgArray[0]">
-        <div class="albums_wrapper_album" *ngFor="let album of favoriteAlbumsArray" 
-            (mouseover)="showModal (modal_album)" 
-            (mouseleave)="closeModal(modal_album)"> 
-            <img class="albums_wrapper_album_img" src="{{album.imgLink}}" alt="album image">
-            <div class="modal_album_info" #modal_album (click)="makeLike(album, imgArray[i])">
-                <h2>{{album.name}}</h2>
-                <h3>{{album.artist.name}}</h3>
-                <p class="heart" *ngIf="!album.like">&#9825;</p>
-                <p class="fillHeart" *ngIf="album.like">&#10084;</p>
+    <div class="albums_wrapper" *ngIf="(albumsData && imgArray) || (favoriteAlbumsArray[0])" >
+            <div class="albums_wrapper_album" *ngFor="let album of favoriteAlbumsArray" 
+                (mouseover)="showModal (modal_album)" 
+                (mouseleave)="closeModal(modal_album)"> 
+                <img class="albums_wrapper_album_img" src="{{album.imgLink}}" alt="album image">
+                <div class="modal_album_info" #modal_album (click)="makeLike(album, album.imgLink)">
+                    <h2>{{album.name}}</h2>
+                    <h3>{{album.artist.name}}</h3>
+                    <p class="heart" *ngIf="!album.like">&#9825;</p>
+                    <p class="fillHeart" *ngIf="album.like">&#10084;</p>
+                </div>
             </div>
-        </div>
-
         <div class="albums_wrapper_album" *ngFor="let album of albumsData; let i=index" 
             (mouseover)="showModal (modal_album)" 
             (mouseleave)="closeModal(modal_album)"> 
@@ -28,9 +27,10 @@
                 <h3>{{album.artist.name}}</h3>
                 <p class="heart" *ngIf="!album.like">&#9825;</p>
                 <p class="fillHeart" *ngIf="album.like">&#10084;</p>
-                
-            </div>
+            </div>            
         </div>
     </div>
+
+
 
 

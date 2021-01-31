@@ -1,6 +1,5 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Params } from '@angular/router';
-import { filter } from 'rxjs/operators';
 import {DataFromServerService} from '../../services/data-from-server.service';
 import {LocalStorageService} from '../../services/local-storage.service';
 import {FavoriteAlbums} from '../FavoriteAlbums';
@@ -13,11 +12,15 @@ import {FavoriteAlbums} from '../FavoriteAlbums';
 export class AlbumsComponent implements OnInit {
   ganre:string;
   imgArray:string[]=[];
+  copyImgArray:string[]=[];;
   albumsData:any;
+  copyAlbumsData:any;
   favoriteAlbumsArray:object[]=[];
+  copyFavoriteAlbumsArray:object[]=[];
   tempFavoriteAlbumsArray:object[]=[];
   likesCounter:number = 0;
-
+  flag:boolean = true;
+    
   constructor(private activatedRoute: ActivatedRoute,
              private dataFromServerService: DataFromServerService,
              private localStorageService:LocalStorageService
@@ -26,7 +29,7 @@ export class AlbumsComponent implements OnInit {
   ngOnInit(): void {
 
     this.activatedRoute.params.forEach((params: Params) => {
-     this.ganre = params.salectedGanre;
+      this.ganre = params.salectedGanre;
     });
 
     this.favoriteAlbumsArray = this.localStorageService.getData(this.ganre);
@@ -52,10 +55,7 @@ export class AlbumsComponent implements OnInit {
       }
     });
 
-    
-
     this.dataFromServerService.getAlbumsData(this.ganre).subscribe (data => {
-      console.log(data);
       this.albumsData = data ['albums']['album'];
 
       if (this.favoriteAlbumsArray[0]) {
@@ -66,18 +66,16 @@ export class AlbumsComponent implements OnInit {
           return true
          })
       }
-      console.log(this.albumsData);
+     
     })
-   
-    
-    
+       
   }
 
-  showModal (modal_album) {
+  showModal (modal_album:any) {
     modal_album.style.display = 'block';
   }
 
-  closeModal (modal_album) {
+  closeModal (modal_album:any) {
     modal_album.style.display = 'none';
   }
 
@@ -94,64 +92,57 @@ export class AlbumsComponent implements OnInit {
     this.likesCounter++;
         
     this.tempFavoriteAlbumsArray.push(new FavoriteAlbums (album.name, album.artist.name, imgLink, album.like));
+    console.log('album.name', album.name, 'imgLink', imgLink );
+    
     this.localStorageService.postData (this.ganre, this.tempFavoriteAlbumsArray);
    
   }
-  flag:boolean = true;
-  copyAlbumsData;
-  copyImgArray;
+  
   serch (searchText:string) {
-    console.log('search');
-    
-    if (searchText.length == 0) {
-      // this.albumsData = JSON.parse(JSON.stringify(this.copyAlbumsData));
-      // this.copyImgArray = JSON.parse(JSON.stringify(this.imgArray));
-      return};
-
+        
+      if (searchText.length == 0) {
+        this.loadCopyData ();
+        this.loadCopyFavoriteAlbumsArray ();
+        this.flag = true;
+        return;
+      }
     
       if (this.flag) {
-        this.copyAlbumsData = JSON.parse(JSON.stringify(this.albumsData));
-        console.log('this.copyAlbumsData', this.copyAlbumsData);
-        
-        this.copyImgArray = JSON.parse(JSON.stringify(this.imgArray));
-        console.log('this.copyImgArray', this.copyImgArray);
-        this.flag = false}
+        this.makeCopyData ();
+        this.flag = false
+      }
       
-      this.albumsData = JSON.parse(JSON.stringify(this.copyAlbumsData));
-      console.log('this.albumsData', this.albumsData);
+      this.loadCopyData();
       
-      this.imgArray = JSON.parse(JSON.stringify(this.copyImgArray));
-      console.log('this.imgArray', this.imgArray);
-      
-   
-
-    for (let i=0; i<this.albumsData.length; i++) {
+      for (let i=0; i<this.albumsData.length; i++) {
         if ( !(this.albumsData[i].name.toLowerCase().includes(searchText.toLowerCase())) ) {
           this.imgArray.splice(i,1);
           this.albumsData.splice(i,1);
           i--;
         }
-    }
+      }
 
-    
-    
-
-
-   //this.albumsData = JSON.parse(JSON.stringify(copyAlbumsData));
-   
-   
-
-
-    
-    
-
-
-    
+      this.loadCopyFavoriteAlbumsArray ();
+      if (this.favoriteAlbumsArray[0]) {        
+        this.favoriteAlbumsArray = this.favoriteAlbumsArray.filter(item => item['name'].toLowerCase().includes(searchText.toLowerCase()));
+      }
   }
 
+  makeCopyData () {
+    this.copyAlbumsData = JSON.parse(JSON.stringify(this.albumsData));
+    this.copyImgArray = JSON.parse(JSON.stringify(this.imgArray));
+    this.copyFavoriteAlbumsArray = JSON.parse(JSON.stringify(this.favoriteAlbumsArray));
+  }
 
+  loadCopyData () {
+      this.albumsData = JSON.parse(JSON.stringify(this.copyAlbumsData));
+      this.imgArray = JSON.parse(JSON.stringify(this.copyImgArray));
+  }
 
+  loadCopyFavoriteAlbumsArray (){
+    this.favoriteAlbumsArray = JSON.parse(JSON.stringify(this.copyFavoriteAlbumsArray));
+  }
 
-
-
+  
 }
+

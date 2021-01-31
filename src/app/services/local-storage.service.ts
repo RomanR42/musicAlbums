@@ -15,7 +15,6 @@ export class LocalStorageService {
   getData (nameInLocalStorage:string) {
     let data = window.localStorage.getItem(nameInLocalStorage);
     if (data) {return JSON.parse (data)} else { return []}
-   
   }
 
 }

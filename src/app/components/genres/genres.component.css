@@ -1,12 +1,13 @@
 
 .genres {
-    width: 100%;
-    height: 100%;
-    margin-top: 5%;
+    max-width: 1700px;
+    margin: auto;
+    margin-top: 11vh;
     background-color: black;
     display: flex;
     justify-content: center;
     flex-wrap: wrap;
+   
 }
 
 .genres > img {
@@ -17,4 +18,11 @@
 .genres > img:hover {
     border:1px solid yellow;
     border-radius: 10px;
+}
+
+@media (max-width: 450px) {
+
+    .genres > img {
+        width: 280px;
+    }
 }
