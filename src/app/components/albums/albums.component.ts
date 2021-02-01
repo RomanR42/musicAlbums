@@ -3,6 +3,7 @@ import { ActivatedRoute, Params } from '@angular/router';
 import {DataFromServerService} from '../../services/data-from-server.service';
 import {LocalStorageService} from '../../services/local-storage.service';
 import {FavoriteAlbums} from '../FavoriteAlbums';
+import { HttpErrorResponse } from '@angular/common/http';
 
 @Component({
   selector: 'app-albums',
@@ -53,21 +54,20 @@ export class AlbumsComponent implements OnInit {
           return true
         })
       }
-    });
+    }, (err: HttpErrorResponse) => {alert (err)});
 
     this.dataFromServerService.getAlbumsData(this.ganre).subscribe (data => {
       this.albumsData = data ['albums']['album'];
-
       if (this.favoriteAlbumsArray[0]) {
         this.albumsData = this.albumsData.filter(albumsDataItem => {
           for (let i=0; i<this.favoriteAlbumsArray.length; i++) {
             if (albumsDataItem.name == this.favoriteAlbumsArray[i]['name']) {return false}
           } 
           return true
-         })
+        })
       }
      
-    })
+    }, (err: HttpErrorResponse) => {alert (err)})
        
   }
 
@@ -92,8 +92,6 @@ export class AlbumsComponent implements OnInit {
     this.likesCounter++;
         
     this.tempFavoriteAlbumsArray.push(new FavoriteAlbums (album.name, album.artist.name, imgLink, album.like));
-    console.log('album.name', album.name, 'imgLink', imgLink );
-    
     this.localStorageService.postData (this.ganre, this.tempFavoriteAlbumsArray);
    
   }
