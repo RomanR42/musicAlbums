@@ -20,6 +20,14 @@
     border-radius: 10px;
 }
 
+.portfolio {
+    color: red;
+}
+
+.portfolio > a {
+    color:cyan;
+}
+
 @media (max-width: 450px) {
 
     .genres > img {

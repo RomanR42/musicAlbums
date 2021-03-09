@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from "@angular/router";
+import {environment} from '../../../environments/environment';
 
 @Component({
   selector: 'app-genres',
@@ -7,7 +8,7 @@ import { Router } from "@angular/router";
   styleUrls: ['./genres.component.css']
 })
 export class GenresComponent implements OnInit {
-
+  assetsPath = environment.assetsPath;
   constructor(private router:Router) { }
 
   ngOnInit(): void {
@@ -17,4 +18,5 @@ export class GenresComponent implements OnInit {
     this.router.navigate(["albums", {salectedGanre: ganre}]);
   }
 
+  
 }
